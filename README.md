@@ -1,53 +1,160 @@
-CyberTrain 🏋️‍♂️
-Aplicación Android para planificar, ejecutar y registrar entrenamientos de fuerza e hipertrofia. Combina el método 5/3/1, rutinas personalizables y herramientas de cálculo en una interfaz de estilo cyberpunk desarrollada con Kotlin y Jetpack Compose.
-Estado del proyecto: versión 11, en desarrollo y validación en dispositivos. El código fuente incluye mejoras para temporizadores y notificaciones en segundo plano; su comportamiento en pantalla bloqueada aún requiere pruebas en equipos reales.
 
-🎯 Objetivo
-Crear una aplicación de entrenamiento que permita organizar rutinas, calcular cargas de trabajo, controlar descansos entre series y consultar el historial de sesiones, sin depender de servicios en la nube.
-✨ Funcionalidades
-- Dos modalidades de entrenamiento: fuerza e hipertrofia.
-- Método 5/3/1: cálculo automático de series y cargas por semana, con opción de ingresar pesos manuales.
-- Rutinas editables: agregar, modificar, duplicar, reordenar y eliminar ejercicios.
-- Seguimiento de series: registrar progreso y descansos durante una sesión.
-- Temporizador de descanso: contador basado en una hora de finalización absoluta, con notificaciones de entrenamiento, Foreground Service y alarmas de respaldo mediante AlarmManager.
-- Historial: consulta de sesiones finalizadas y volumen registrado.
-- Herramientas de entrenamiento: estimación de 1RM (Epley y Brzycki), porcentajes de carga y calculadora de discos.
-- Almacenamiento local: conservación de rutinas, configuración y sesión activa mediante DataStore.
-- Diseño cyberpunk: interfaz con elementos visuales neón, creada con Jetpack Compose y Material 3.
-🛠️ Tecnologías
-Tecnología	Uso en el proyecto
-Kotlin	Lenguaje principal
-Jetpack Compose / Material 3	Interfaz de usuario declarativa
-Navigation Compose	Navegación entre pantallas
-DataStore Preferences	Persistencia local
-Kotlin Coroutines / Flow	Procesamiento asíncrono y estado reactivo
-Kotlinx Serialization	Serialización de datos
-Foreground Service / AlarmManager / WakeLock	Temporizador y avisos de descanso
-JUnit	Pruebas unitarias de cálculos y rutinas
-Gradle Kotlin DSL	Configuración y compilación
+<div align="center">
 
+# ⚡ CyberTrain
 
-📂 Organización del código
+### 🏋️ Entrena con precisión. Supera tus límites.
+
+**Aplicación Android para gestionar entrenamientos de fuerza e hipertrofia.**
+
+![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-Development-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack-Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)
+![Estado](https://img.shields.io/badge/Estado-En%20desarrollo-FFB300?style=for-the-badge)
+
+</div>
+
+---
+
+## 📱 ¿Qué es CyberTrain?
+
+**CyberTrain** es una aplicación móvil desarrollada de forma nativa para Android utilizando **Kotlin y Jetpack Compose**.
+
+Su objetivo es facilitar la planificación, ejecución y seguimiento de entrenamientos de fuerza e hipertrofia mediante una interfaz moderna de estilo **cyberpunk**.
+
+La aplicación integra el método de entrenamiento **5/3/1**, rutinas personalizables, calculadoras de fuerza, temporizadores de descanso e historial de entrenamientos.
+
+---
+
+## ✨ Funcionalidades principales
+
+- 🏋️ **Entrenamientos de fuerza e hipertrofia:** diferentes modalidades de entrenamiento.
+- 📈 **Método 5/3/1:** cálculo automático de cargas y configuración manual de pesos.
+- ⚙️ **Rutinas personalizables:** creación y edición de ejercicios y entrenamientos.
+- ⏱️ **Temporizador de descanso:** control del tiempo entre series.
+- 🔔 **Notificaciones:** avisos durante las sesiones mediante servicios de Android.
+- 📊 **Historial:** seguimiento de entrenamientos realizados.
+- 🧮 **Calculadoras:** estimación de repetición máxima (1RM), porcentajes y distribución de discos.
+- 💾 **Persistencia local:** almacenamiento de rutinas, configuraciones y sesiones.
+- 🌃 **Diseño cyberpunk:** interfaz futurista con elementos visuales personalizados.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+| Tecnología | Uso |
+| :--- | :--- |
+| **Kotlin** | Lenguaje principal |
+| **Jetpack Compose** | Desarrollo de interfaces |
+| **Material 3** | Componentes visuales |
+| **Navigation Compose** | Navegación |
+| **DataStore** | Almacenamiento local |
+| **Coroutines y Flow** | Programación asíncrona |
+| **Kotlinx Serialization** | Serialización de datos |
+| **Foreground Service** | Servicio de entrenamiento |
+| **AlarmManager** | Gestión de alarmas |
+| **JUnit** | Pruebas unitarias |
+| **Gradle** | Gestión de dependencias |
+
+---
+
+## 📂 Arquitectura del proyecto
+
+```text
 app/src/main/java/com/tecnosuper/neon531/
-├── data/       # Modelos y almacenamiento local
-├── domain/     # Reglas 5/3/1, 1RM, rutinas y cálculo de discos
-├── service/    # Servicio de entrenamiento, temporizador y receptores
-└── ui/         # Pantallas, componentes, navegación y tema visual
-🚀 Ejecutar el proyecto
-1. Clona el repositorio y ábrelo en Android Studio.
-2. Configura JDK 17 y el SDK de Android 35.
-3. Sincroniza las dependencias de Gradle.
-4. Ejecuta la app en un emulador o dispositivo con Android 8.0 (API 26) o superior.
-5. Para probar las alertas, autoriza las notificaciones y revisa los permisos de alarmas y las opciones de pantalla bloqueada del dispositivo.
-Nota sobre la compilación: la versión fuente publicada originalmente no contiene gradlew, gradlew.bat ni gradle-wrapper.jar, aunque sí incluye la configuración para Gradle 8.9. Si no cuentas con el wrapper, genéralo con Gradle instalado o desde Android Studio antes de compilar.
-🧪 Pruebas y estado
-El repositorio contiene pruebas unitarias de 5/3/1, estimación de 1RM y configuración de rutinas manuales. Las últimas modificaciones del temporizador se revisaron de forma estática, pero aún no han sido compiladas ni probadas en un dispositivo físico. El proyecto no debe considerarse una versión estable de producción hasta completar esas pruebas.
-📸 Capturas de pantalla
-Pendiente: agregar imágenes reales de la pantalla principal, la rutina activa, el modo 5/3/1, el historial y las herramientas de cálculo.
-🔜 Próximas mejoras
-- Validar temporizador, alarma y notificaciones en diferentes fabricantes y versiones de Android.
-- Ampliar las pruebas instrumentadas y de interfaz.
-- Incorporar capturas de pantalla y una demostración del funcionamiento.
-- Preparar una versión instalable de demostración cuando la compilación esté validada.
-📌 Sobre el desarrollo
-Este proyecto reúne prácticas de desarrollo móvil nativo, diseño de interfaces, lógica de negocio, almacenamiento local y gestión de procesos en segundo plano. Es parte de mi portafolio de desarrollo de software y continúa en evolución.
+│
+├── data/
+│   ├── Models.kt
+│   └── WorkoutStore.kt
+│
+├── domain/
+│   ├── FiveThreeOne.kt
+│   ├── OneRepMax.kt
+│   ├── PlateCalculator.kt
+│   └── RoutineFactory.kt
+│
+├── service/
+│   ├── WorkoutService.kt
+│   ├── RestTimerReceiver.kt
+│   └── BootReceiver.kt
+│
+├── ui/
+│   ├── screens/
+│   ├── components/
+│   └── theme/
+│
+└── MainActivity.kt
+```
+
+---
+
+## 🚀 Instalación
+
+1. Descarga o clona este repositorio.
+2. Abre el proyecto en **Android Studio**.
+3. Configura **JDK 17** y Android SDK 35.
+4. Sincroniza las dependencias de Gradle.
+5. Ejecuta la aplicación en un dispositivo Android 8.0 o superior.
+
+> **Nota:** es posible que necesites generar el Gradle Wrapper 8.9 antes de compilar el proyecto.
+
+---
+
+## 📸 Capturas de pantalla
+
+Próximamente se agregarán capturas de:
+
+- Pantalla principal.
+- Gestión de rutinas.
+- Entrenamiento activo.
+- Método 5/3/1.
+- Historial y calculadoras.
+
+---
+
+## 🧪 Estado del proyecto
+
+**🚧 Versión 11 — En desarrollo**
+
+Actualmente se están realizando mejoras y validaciones relacionadas con:
+
+- Estabilidad del temporizador.
+- Actualización de notificaciones.
+- Funcionamiento con pantalla bloqueada.
+- Recuperación de sesiones.
+
+Las correcciones recientes todavía requieren validación en dispositivos Android reales.
+
+---
+
+## 🎯 Próximas mejoras
+
+- [ ] Validación en diferentes dispositivos Android.
+- [ ] Pruebas de integración y de interfaz.
+- [ ] Capturas y demostración de la aplicación.
+- [ ] Publicación de una versión instalable estable.
+
+---
+
+## 👨‍💻 Sobre el proyecto
+
+Desarrollé **CyberTrain** como parte de mi portafolio personal de desarrollo de software.
+
+Este proyecto me ha permitido aplicar y fortalecer conocimientos en:
+
+- Desarrollo móvil nativo con Kotlin.
+- Arquitectura y organización de aplicaciones.
+- Diseño de interfaces con Jetpack Compose.
+- Implementación de lógica de negocio.
+- Persistencia y gestión de datos locales.
+- Manejo de servicios y notificaciones de Android.
+
+---
+
+<div align="center">
+
+### ⚡ CyberTrain
+
+**Constancia • Fuerza • Progreso**
+
+</div>
