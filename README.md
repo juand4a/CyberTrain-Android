@@ -1,30 +1,53 @@
-# CyberTrain v11 — corrección de temporizador y pantalla bloqueada
+CyberTrain 🏋️‍♂️
+Aplicación Android para planificar, ejecutar y registrar entrenamientos de fuerza e hipertrofia. Combina el método 5/3/1, rutinas personalizables y herramientas de cálculo en una interfaz de estilo cyberpunk desarrollada con Kotlin y Jetpack Compose.
+Estado del proyecto: versión 11, en desarrollo y validación en dispositivos. El código fuente incluye mejoras para temporizadores y notificaciones en segundo plano; su comportamiento en pantalla bloqueada aún requiere pruebas en equipos reales.
 
-Proyecto Android (Kotlin / Jetpack Compose) actualizado a partir del ZIP **CyberTrain-v10-fixed(2).zip**. Se mantiene el mismo `applicationId` y la persistencia original en DataStore.
+🎯 Objetivo
+Crear una aplicación de entrenamiento que permita organizar rutinas, calcular cargas de trabajo, controlar descansos entre series y consultar el historial de sesiones, sin depender de servicios en la nube.
+✨ Funcionalidades
+- Dos modalidades de entrenamiento: fuerza e hipertrofia.
+- Método 5/3/1: cálculo automático de series y cargas por semana, con opción de ingresar pesos manuales.
+- Rutinas editables: agregar, modificar, duplicar, reordenar y eliminar ejercicios.
+- Seguimiento de series: registrar progreso y descansos durante una sesión.
+- Temporizador de descanso: contador basado en una hora de finalización absoluta, con notificaciones de entrenamiento, Foreground Service y alarmas de respaldo mediante AlarmManager.
+- Historial: consulta de sesiones finalizadas y volumen registrado.
+- Herramientas de entrenamiento: estimación de 1RM (Epley y Brzycki), porcentajes de carga y calculadora de discos.
+- Almacenamiento local: conservación de rutinas, configuración y sesión activa mediante DataStore.
+- Diseño cyberpunk: interfaz con elementos visuales neón, creada con Jetpack Compose y Material 3.
+🛠️ Tecnologías
+Tecnología	Uso en el proyecto
+Kotlin	Lenguaje principal
+Jetpack Compose / Material 3	Interfaz de usuario declarativa
+Navigation Compose	Navegación entre pantallas
+DataStore Preferences	Persistencia local
+Kotlin Coroutines / Flow	Procesamiento asíncrono y estado reactivo
+Kotlinx Serialization	Serialización de datos
+Foreground Service / AlarmManager / WakeLock	Temporizador y avisos de descanso
+JUnit	Pruebas unitarias de cálculos y rutinas
+Gradle Kotlin DSL	Configuración y compilación
 
-## Cambios realizados
 
-- El contador de descanso está anclado a `restEndsAt`, una fecha/hora absoluta, no a un número que se decrementa en memoria.
-- Mientras hay descanso, la notificación **actualiza también el título visible una vez por segundo**. Mantiene el cronómetro nativo como apoyo. Se evita volver a enviar una imagen pesada a Android SystemUI en cada actualización.
-- Nuevo canal `active_workout_v11`: importancia DEFAULT con sonido desactivado, visibilidad PUBLIC. La notificación ya **no tiene un PublicVersion genérico** que pueda reemplazar el texto del contador en pantalla bloqueada.
-- La destrucción del servicio elimina sus callbacks internos, pero **no cancela la alarma programada en AlarmManager**. El fin normal o la cancelación de un descanso sí cancela la alarma previa.
-- Al volver a abrir la aplicación, `MainActivity` consulta DataStore y vuelve a iniciar el servicio si detecta una sesión sin finalizar.
-- WakeLock acotado a la duración del descanso más un margen de 15 segundos, con máximo de 1 hora por adquisición.
-- La pantalla de entrenamiento actualiza su contador cada segundo (antes cuatro veces por segundo).
-- Eliminados ocho imports inválidos de `androidx.compose.foundation.layout.weight`, **sin eliminar el uso válido de `Modifier.weight`** en filas/columnas.
-- Se mantienen intactas las funciones 5/3/1 de cálculo automático, pesos manuales, incrementos por levantamiento y edición de rutinas.
-- Sonido GYM de hasta 7 segundos y volumen interno máximo del 10% se conservan sin cambios.
-
-## Instalación y comprobación en dispositivo
-
-1. Abrir esta carpeta como proyecto en Android Studio y sincronizar con Gradle. Es un **proyecto de código fuente**, no un APK ya compilado.
-2. Instalar la nueva versión **sobre la anterior**, conservando los datos (no borrar datos ni desinstalar si deseas preservar las rutinas).
-3. Permitir las **notificaciones** y configurar **mostrar en pantalla de bloqueo**, también para el canal *Entrenamiento activo*.
-4. En **Avisos de descanso**, comprobar y, de ser posible, conceder el permiso de **Alarmas y recordatorios** (Android 12+).
-5. Si el fabricante restringe apps en segundo plano, poner CyberTrain en modo de batería **Sin restricciones**.
-6. Iniciar una rutina, terminar una serie con 30–60 s de descanso, bloquear la pantalla: el aviso debe mostrar `DESCANSO · 00:XX`, actualizándose con el paso del tiempo (salvo restricciones de SystemUI/fabricante), hasta la finalización.
-7. Repetir el ensayo bloqueando y desbloqueando, quitando la app de recientes, y abriéndola de nuevo.
-
-**Limitaciones:** ningún código de aplicación normal puede sonar con el teléfono físicamente apagado, ni anular una configuración del sistema que oculte notificaciones bloqueadas. Algunos fabricantes también pueden detener servicios o retrasar alarmas. En esta entrega no se ejecutó el proyecto en un teléfono físico ni se compiló un APK: son cambios y verificaciones estáticas del código fuente.
-
-**Gradle:** el ZIP original traía `gradle/wrapper/gradle-wrapper.properties` pero no `gradlew`, `gradlew.bat` ni `gradle-wrapper.jar`. Se mantiene esa estructura. Abrir con Android Studio; si pide wrapper, generarlo localmente con Gradle 8.9 (`gradle wrapper --gradle-version 8.9`).
+📂 Organización del código
+app/src/main/java/com/tecnosuper/neon531/
+├── data/       # Modelos y almacenamiento local
+├── domain/     # Reglas 5/3/1, 1RM, rutinas y cálculo de discos
+├── service/    # Servicio de entrenamiento, temporizador y receptores
+└── ui/         # Pantallas, componentes, navegación y tema visual
+🚀 Ejecutar el proyecto
+1. Clona el repositorio y ábrelo en Android Studio.
+2. Configura JDK 17 y el SDK de Android 35.
+3. Sincroniza las dependencias de Gradle.
+4. Ejecuta la app en un emulador o dispositivo con Android 8.0 (API 26) o superior.
+5. Para probar las alertas, autoriza las notificaciones y revisa los permisos de alarmas y las opciones de pantalla bloqueada del dispositivo.
+Nota sobre la compilación: la versión fuente publicada originalmente no contiene gradlew, gradlew.bat ni gradle-wrapper.jar, aunque sí incluye la configuración para Gradle 8.9. Si no cuentas con el wrapper, genéralo con Gradle instalado o desde Android Studio antes de compilar.
+🧪 Pruebas y estado
+El repositorio contiene pruebas unitarias de 5/3/1, estimación de 1RM y configuración de rutinas manuales. Las últimas modificaciones del temporizador se revisaron de forma estática, pero aún no han sido compiladas ni probadas en un dispositivo físico. El proyecto no debe considerarse una versión estable de producción hasta completar esas pruebas.
+📸 Capturas de pantalla
+Pendiente: agregar imágenes reales de la pantalla principal, la rutina activa, el modo 5/3/1, el historial y las herramientas de cálculo.
+🔜 Próximas mejoras
+- Validar temporizador, alarma y notificaciones en diferentes fabricantes y versiones de Android.
+- Ampliar las pruebas instrumentadas y de interfaz.
+- Incorporar capturas de pantalla y una demostración del funcionamiento.
+- Preparar una versión instalable de demostración cuando la compilación esté validada.
+📌 Sobre el desarrollo
+Este proyecto reúne prácticas de desarrollo móvil nativo, diseño de interfaces, lógica de negocio, almacenamiento local y gestión de procesos en segundo plano. Es parte de mi portafolio de desarrollo de software y continúa en evolución.
