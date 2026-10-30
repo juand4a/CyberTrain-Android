@@ -1,0 +1,22 @@
+CYBERTRAIN v11 — VALIDACIÓN ESTÁTICA (sin dispositivo físico)
+Fuente: CyberTrain-v10-fixed(2).zip
+
+COMPROBACIONES:
+[OK] Canal v11 DEFAULT, silencioso, VISIBILITY_PUBLIC, sin PublicVersion estático.
+[OK] Notificación de texto ligero actualizada una vez por segundo durante descanso.
+[OK] Timer absoluto restEndsAt + Handler + AlarmManager con fallback.
+[OK] onDestroy limpia Handler pero conserva PendingIntent de AlarmManager.
+[OK] ACTION_STOP cancela expresamente la alarma.
+[OK] MainActivity.onResume restaura el servicio desde DataStore si hay sesión activa.
+[OK] Alarmas exactas gestionadas desde Ajustes de aviso.
+[OK] Sin import androidx.compose.foundation.layout.weight en archivos Kotlin.
+[OK] Cálculo AUTO y cargas MANUAL en RoutineFactory sin cambios.
+[OK] Gradle versionCode 11; mismo applicationId y claves DataStore.
+[OK] MP3, sonidos y configuraciones mantenidas.
+
+LIMITACIONES DE LA VALIDACIÓN:
+No existe Android SDK ni distribución Gradle accesible en este entorno.
+El ZIP original no incluye gradlew, gradlew.bat ni gradle-wrapper.jar.
+Por tanto NO SE EJECUTÓ una compilación Android ni pruebas en un dispositivo.
+La visibilidad en pantalla de bloqueo depende también de los ajustes del usuario
+ y de las restricciones del fabricante.

@@ -1,0 +1,22 @@
+CyberTrain v10 — estabilidad de notificaciones y temporizador
+
+- Corregido el inicio de la notificación: ahora el permiso de notificaciones se resuelve antes de iniciar la rutina.
+- Corregida la inestabilidad causada por reconstruir una notificación con una imagen PNG grande cada segundo.
+- Eliminado el refresco de notificación cada segundo; el contador de descanso usa el chronometer nativo de Android.
+- Imagen cyberpunk de la notificación cargada una sola vez por servicio.
+- Nuevo canal `active_workout_v10` para evitar configuraciones heredadas de canales anteriores.
+- Notificación `VISIBILITY_PUBLIC` + `PublicVersion` para pantalla bloqueada.
+- Foreground Service con comportamiento inmediato en Android 12+.
+- `START_STICKY` + DataStore para recuperación del servicio.
+- `PARTIAL_WAKE_LOCK` durante descansos activos.
+- `AlarmManager` como respaldo del temporizador.
+- Reconciliación inmediata si el descanso venció durante un reinicio/apagado del teléfono.
+- BootReceiver mantiene la recuperación después de reinicio.
+- Sonido GYM máximo 7 segundos.
+- Volumen por defecto corregido a 10% y ahora el valor guardado sí se respeta.
+- Vibración suavizada.
+- No se solicita AudioFocus; la música no recibe una orden de pausa.
+- Ajustes de avisos ahora muestran si las notificaciones están habilitadas.
+
+Limitación Android:
+- Ninguna aplicación normal puede reproducir audio mientras el teléfono está físicamente apagado. Después del arranque se recupera la sesión y se reconcilia el descanso pendiente.

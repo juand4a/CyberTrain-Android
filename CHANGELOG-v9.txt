@@ -1,0 +1,14 @@
+CyberTrain v9
+
+- Alarm MP3 is fixed to 30% MediaPlayer volume and is cut off after exactly 7 seconds.
+- Uses USAGE_ALARM without requesting Audio Focus, so the user's music player is not intentionally paused.
+- Exact rest alarms use setExactAndAllowWhileIdle() when SCHEDULE_EXACT_ALARM access is available.
+- Fallback uses setAndAllowWhileIdle() when exact-alarm access is unavailable.
+- Added BootReceiver for BOOT_COMPLETED and MY_PACKAGE_REPLACED so persisted active workouts can recover after reboot/app replacement.
+- Notification channel id bumped to v9 and importance raised to DEFAULT; the channel remains silent because the service owns the audio alert.
+- Notification visibility is PUBLIC and a PublicVersion is provided for the lock screen.
+- Added exact-alarm status and shortcut to Alarm & reminders in Rest Alert Settings.
+- Added shortcut to Android notification settings for lock-screen visibility.
+- Rest Alert Settings now clearly shows the fixed 30% / 7-second alarm behavior.
+- WorkoutStore default rest alert volume is now 30.
+- 5/3/1 independent per-lift increments remain supported.

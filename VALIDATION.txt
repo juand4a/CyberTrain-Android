@@ -1,0 +1,29 @@
+CYBERTRAIN v10 VALIDATION
+
+Source project reviewed: CyberTrain-v9(1).zip
+
+Implemented:
+[OK] Foreground Service starts immediately with a base notification.
+[OK] Notification permission is resolved before starting a new workout on Android 13+.
+[OK] Notification channel changed to active_workout_v10 to avoid inherited channel settings.
+[OK] Notification is PUBLIC for lock screen and includes PublicVersion.
+[OK] Notification no longer rebuilds every second.
+[OK] Rest countdown uses Android chronometer from absolute restEndsAt.
+[OK] Cyberpunk notification image is decoded once per service instead of once per tick.
+[OK] Handler schedules rest completion while service is alive.
+[OK] AlarmManager is used as a system fallback and exact alarms are used when allowed.
+[OK] PARTIAL_WAKE_LOCK is held while a rest is active.
+[OK] BootReceiver restores service after reboot/app replacement.
+[OK] Expired rest after reboot is reconciled immediately.
+[OK] No AudioFocus is requested for the custom alarm sound.
+[OK] Alarm duration remains capped at 7 seconds.
+[OK] Alarm volume default changed from 30% to 10% and saved volume is now respected.
+[OK] Vibration amplitude reduced.
+[OK] Rest alert settings expose notification permission status.
+[OK] Persistent routine and active session data remain in DataStore.
+
+Android limitation:
+[INFO] A normal Android app cannot execute or play audio while the phone is physically powered off. After boot, the persisted workout is restored and an expired rest is reconciled.
+
+Build environment:
+[INFO] The uploaded archive does not contain gradle-wrapper.jar/gradlew and this execution environment has no local Android SDK/Gradle distribution, so a full Android Gradle build could not be executed here. Kotlin parser checks were run against modified source files; no Kotlin syntax errors were reported, while Android symbols were expected to remain unresolved outside the Android SDK classpath.

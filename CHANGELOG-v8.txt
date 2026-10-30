@@ -1,0 +1,13 @@
+CyberTrain v8
+
+- Replaced the generic ToneGenerator alert with the supplied GYM alarm MP3.
+- The supplied alarm is played for exactly 7 seconds and then stopped.
+- No AudioFocus is requested, so CyberTrain does not ask the user's music player to pause.
+- Added AlarmManager fallback plus a foreground-service Handler based on absolute restEndsAt.
+- Rest timer remains anchored to an absolute timestamp instead of decrementing a counter.
+- Added RestTimerReceiver to recover the rest timer when the app UI is closed or the service is recreated.
+- Foreground service remains START_STICKY and rehydrates the active session from DataStore.
+- Added exact-alarm permission with fallback to setAndAllowWhileIdle when exact alarms are not available.
+- Kept the cyberpunk expanded notification artwork.
+- Test alert button now uses the same 7-second MP3.
+- Force Stop remains an Android system exception: a force-stopped app cannot restart its service/alarm until the user opens it again.

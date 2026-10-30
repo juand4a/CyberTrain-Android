@@ -1,0 +1,31 @@
+CYBERTRAIN v7
+
+Cambios de esta versión
+
+1. Aviso de descanso de 7 segundos
+- El aviso de fin de descanso ya no usa un único tono de 220 ms.
+- Reproduce pulsos de beep durante una ventana de 7 segundos.
+- Usa STREAM_MUSIC sin solicitar Audio Focus.
+- La música de Spotify/YouTube Music no recibe una orden de pausa desde CyberTrain.
+- El botón "PROBAR AVISO" utiliza el mismo comportamiento de 7 segundos.
+
+2. Notificación persistente al cerrar la aplicación
+- WorkoutService continúa como Foreground Service.
+- START_STICKY permite que Android pueda recrearlo después de una terminación por memoria.
+- onTaskRemoved() vuelve a publicar la notificación si el usuario quita CyberTrain de Recientes mientras existe un entrenamiento activo.
+- El estado del entrenamiento, descanso y pausa sigue persistido en DataStore.
+- Al abrir la notificación se vuelve directamente a la sesión activa.
+
+3. Notificación visual
+- Durante el descanso utiliza cyber_city.png en BigPictureStyle.
+- Si la imagen no puede cargarse, usa una notificación de texto como respaldo.
+- Se mantiene el canal silencioso: el sonido lo controla el servicio al llegar a cero.
+
+4. 5/3/1 individual
+- Sentadilla, press y peso muerto tienen incrementos independientes.
+- El usuario puede escribir cualquier incremento, por ejemplo +2 kg para press y +5 kg para peso muerto.
+- El nuevo Training Max se calcula por ejercicio y la vista previa recalcula automáticamente las 3 semanas.
+- El Training Max y el redondeo se guardan en DataStore.
+
+Nota
+- Un "Forzar detención" desde Ajustes de Android detiene deliberadamente los servicios y Android puede impedir su reinicio hasta que el usuario vuelva a abrir la aplicación. Ninguna app puede garantizar continuar después de un force-stop del sistema.

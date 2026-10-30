@@ -1,0 +1,16 @@
+CyberTrain v11 — 30/10/2026
+
+Corrección de congelamiento aparente del contador y visibilidad de notificaciones:
+* Refresco de notificación de descanso cada segundo, sin Bitmap grande.
+* Se conserva cronómetro Android, con tiempo visible en título y texto extendido.
+* Se elimina PublicVersion estático; VISIBILITY_PUBLIC con canal nuevo DEFAULT / silencioso.
+* Corrección: onDestroy ya no cancela la alarma de respaldo de AlarmManager.
+* Cancelación correcta de alarma cuando el usuario termina la sesión.
+* Recuperación del foreground service al regresar a la aplicación.
+* Actualización del contador Compose de 250 ms a 1 s.
+* WakeLock limitado a descanso + margen.
+* Eliminados imports inválidos androidx.compose.foundation.layout.weight de 8 archivos.
+* Intactos: 5/3/1 AUTO/MANUAL, editor de rutinas, DataStore, alarma MP3 7 s / 10 %.
+
+Verificaciones: validaciones estáticas de archivos, configuración, rutas y empaquetado.
+No se garantiza comportamiento en todos los modelos Android sin pruebas en teléfono.
